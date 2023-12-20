@@ -9,7 +9,7 @@
 # WORKFLOW
 import cv2, (딥러닝, OCR 인식,) subprocess, json
 
-### 함수s
+### 여러 함수
 * has_next_frame()
 * get_next_frame()
 * find_text_contours(fr_preprocessed)
@@ -53,4 +53,4 @@ import cv2, (딥러닝, OCR 인식,) subprocess, json
   * manipulate_after_effects(list_text_contours)
 * 종료
 
-이 때 manipulate_after_effects()는 C++ 파일 함수를 호출하며, 이 때 json 파일을 통해 소통한다.
+이 때 main 파일은 C++로 제작하며, 나머지 부분은 파이썬 파일로 구현하여 subprocess와 json을 가지고 결합시킨다.
