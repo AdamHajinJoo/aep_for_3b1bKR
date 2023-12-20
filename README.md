@@ -1,31 +1,35 @@
 # aep_for_3b1bKR
 
-기존 푸티지의 모든 라틴어 텍스트를 검정색으로 칠하고, 그 텍스트 위에 새 텍스트 레이어를 추가한다.
+기존 푸티지의 모든 라틴어 텍스트를 검정색으로 칠하고, 그 텍스트 위에 새 텍스트 레이어를 추가하는 after effect 플러그인.
 - input:    orig.mp4
 - output:   None
 
 ---
 
 # WORKFLOW
-필요한 것:  OpenCV, 딥러닝, OCR 인식
+import cv2, (딥러닝, OCR 인식,) subprocess, json
 
-### 함수1 - 이미지 전처리
+### 함수s
+* has_next_frame()
+* get_next_frame()
+* find_text_contours(fr_preprocessed)
+  * Contours 추출
+* perform_ocr(list_contours)
+
+### 주요함수1: preprocess_image(frame)
+이미지 전처리
 * 전처리 이미지 반환
 
-### 함수2 - 텍스트 경계 그룹(Contours) 판별
-* 전처리 이미지로부터 List_coutours 판별
-* List_contours에서 텍스트인 녀석 판별
-  * 텍스트이면: List_text_contours에 append
-* List_text_contours 반환
-  * _고민: 함수3을 이렇게 분리하는 게 오히려 중복되거나 지연되는 작업인 것은 아닐까?_
+### 주요함수2: extract_text_contours(fr_preprocessed)
+텍스트 경계 그룹(Contours) 판별
+* list_contours = find_text_contours(frame_preprocessed)
+* 딥러닝을 활용하여 list_contours에서 텍스트인 녀석 판별
+  * 텍스트이면: list_text_contours에 append
+* list_text_contours = perform_ocr(list_contours)
+* list_text_contours 반환
 
-
-### 함수3 - OCR로 contours에 text 내용도 포함
-* OCR로 List_text_contours의 내용 인식
-  * 수식이면: pop
-* List_text_contours_2
-
-### 함수4 - 에프터 이펙트를 직접 조작
+### 주요함수3: manipulate_after_effects(list_text_contours)
+에프터 이펙트를 직접 조작. subprocess.run을 통해 C++ 프로그램을 실행할 수 있다.
 * 리스트 별로:
   * 첫 번째 프레임이 아니라면:
     * 이전 프레임에 내용이 같은 텍스트 레이어가 존재한다면:
@@ -42,9 +46,11 @@
 * None 반환
 
 ### main함수
-* While 원본 영상 프레임:
-  * **함수1(frame)** ==> frame_preprocessed
-  * **함수2(frame)** ==> List_text_contours
-  * **함수3(List_text_contours)** ==> List_text_contours_2
-  * **함수4(List_text_contours_2)** ==> None
+* While has_next_frame():
+  * frame = get_next_frame()
+  * fr_preprocessed = preprocess_image(frame)
+  * list_text_contours = extract_text_contours(fr_preprocessed)
+  * manipulate_after_effects(list_text_contours)
 * 종료
+
+이 때 manipulate_after_effects()는 C++ 파일 함수를 호출하며, 이 때 json 파일을 통해 소통한다.
