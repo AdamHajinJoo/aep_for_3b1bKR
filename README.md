@@ -29,7 +29,7 @@ import cv2, (딥러닝, OCR 인식,) subprocess, json
 * list_text_contours 반환
 
 ### 주요함수3: manipulate_after_effects(list_text_contours)
-에프터 이펙트를 직접 조작. subprocess.run을 통해 C++ 프로그램을 실행할 수 있다.
+에프터 이펙트를 직접 조작.
 * 리스트 별로:
   * 첫 번째 프레임이 아니라면:
     * 이전 프레임에 내용이 같은 텍스트 레이어가 존재한다면:
