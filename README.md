@@ -1,6 +1,6 @@
 # aep_for_3b1bKR
 
-기존 푸티지의 모든 라틴어 텍스트를 검정색으로 칠하고, 그 텍스트 위에 새 텍스트 레이어를 추가하는 after effect 플러그인.
+기존 푸티지의 모든 라틴어 텍스트를 검정색으로 칠하고, 그 텍스트 위에 새 텍스트 레이어를 추가하는 after effect 스크립트.
 - input:    orig.mp4
 - output:   None
 
@@ -53,4 +53,4 @@ import cv2, (딥러닝, OCR 인식,) subprocess, json
   * manipulate_after_effects(list_text_contours)
 * 종료
 
-이 때 main 파일은 C++로 제작하며, 나머지 부분은 파이썬 파일로 구현하여 subprocess와 json을 가지고 결합시킨다.
+이 때 main 파일은 JS로 제작하며, 나머지 부분은 파이썬 파일로 구현하여 subprocess와 json으로 결합시킨다.
