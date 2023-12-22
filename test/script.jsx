@@ -1,7 +1,4 @@
-// After Effects 스크립트 예제
-
-// 새로운 프로젝트 생성
-var proj = app.newProject();
+var proj = app.project
 
 // 새로운 컴포지션 생성
 var comp = proj.items.addComp("MyComposition", 1920, 1080, 1.0, 10, 30);
